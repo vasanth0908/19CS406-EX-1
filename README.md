@@ -24,7 +24,34 @@ Close the input and output streams.
 Close the client socket.
 Stop.
 
+PROGRAM:
+CLIENT PROGRAM :
+import socket
+s=socket.socket()
+s.bind(('localhost',8000))
+s.listen(5)
+c,addr=s.accept()
+address={"165.165.80.80":"6A:08:AA:C2","165.165.79.1":"8A:BC:E3:FA"};
+while True:
+ ip=c.recv(1024).decode()
+ try:
+ c.send(address[ip].encode())
+ except KeyError:
+ c.send("Not Found".encode())
+ 
+ 
+SERVER PROGRAM :
+import socket
+s=socket.socket()
+s.connect(('localhost',8000))
+print(s.getsockname())
+print(s.recv(1024).decode())
+s.send("acknowledgement recived from the server".encode())
+
 OUTPUT:
+![1](https://github.com/vasanth0908/19CS406-EX-1/assets/122000018/943bf759-d77b-49dc-b18a-75e76a1cc93a)
+
+![2](https://github.com/vasanth0908/19CS406-EX-1/assets/122000018/de28b101-03ea-48e9-b8c5-c0c38eba9e3f)
 
 
 
